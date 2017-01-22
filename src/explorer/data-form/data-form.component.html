@@ -1,0 +1,52 @@
+
+<md-card>
+    <md-card-content>
+        <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <label for="s1">Categories</label>
+                <select id="s1" class="form-control">
+                    <option *ngFor="let category of categories"
+                            value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <label for="s2">Subcategories</label>
+                <select id="s2" class="form-control">
+                    <option *ngFor="let subcateg of subcategories"
+                            value="{{subcateg.subcategoryId}}">{{subcateg.name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <select style="max-height: 65px;" id="select222" multiple="" class="form-control selectpicker">
+                    <option *ngFor="let gender of populationGender"
+                            value="{{gender.genderId}}">
+                        {{gender.name}}
+                    </option>
+                </select>
+            </div>
+            <div class='col-sm-6 col-md-4 col-lg-3'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker6'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='form-group col-sm-6 col-md-4 col-lg-3'>
+                <div class='input-group input-daterange' id='datetimepicker7'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button (click)="getData()">Get data</button>
+    </md-card-actions>
+</md-card>

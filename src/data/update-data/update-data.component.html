@@ -1,0 +1,37 @@
+<md-card style="min-width: 400px; margin: 0 auto">
+  <md-card-header style="margin-bottom: 50px;">
+    <md-card-title>
+      <h3>Add/Update data</h3>
+    </md-card-title>
+    <md-card-subtitle>
+      Fill the form or upload a csv file
+    </md-card-subtitle>
+  </md-card-header>
+
+  <md-card-content>
+    <md-input-container>
+      <input md-input placeholder="Country" value="">
+    </md-input-container>
+
+    <div class="">
+      <label for="s1">Categories</label>
+      <select id="s1" class="form-control">
+        <option *ngFor="let category of categories"
+                value="{{category.id}}">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="">
+      <label for="s2">Subcategories</label>
+      <select id="s2" class="form-control">
+        <option *ngFor="let subcateg of subcategories"
+                value="{{subcateg.id}}">{{subcateg.name}}</option>
+      </select>
+    </div>
+    <md-input-container>
+      <input md-input placeholder="Upload file" value="">
+    </md-input-container>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button>Update</button>
+  </md-card-actions>
+</md-card>

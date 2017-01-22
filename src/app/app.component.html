@@ -1,0 +1,22 @@
+<div>
+  <md-toolbar class="navigation-bar shadow">
+    <span>
+       <a aria-label="GEXP" md-button [routerLink]="['/welcome']">
+        <img src="./assets/images/logo.png"
+             style="max-height:44px;max-width: 44px;"/>
+        {{ pageTitle }}
+      </a>
+    </span>
+
+    <a class="white" md-button [routerLink]="['/explorer']">Data Explorer</a>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+    <a class="white" md-button [routerLink]="['/data']">Update data</a>
+  </md-toolbar>
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
