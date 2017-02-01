@@ -1,5 +1,7 @@
 .countries-list {
+    min-height: 500px;
     max-height: 500px;
+
     overflow: hidden;
     overflow-y: scroll;
     /*color: #00bcd4*/

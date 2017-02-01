@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from '../home/welcome.component';
 import 'hammerjs';
 import {DataModule} from "../data/data.module";
+import {InputTextModule} from 'primeng/primeng'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {DataModule} from "../data/data.module";
     BrowserModule,
     HttpModule,
     Ng2GoogleChartsModule,
+    InputTextModule,
     AlertModule.forRoot(),
     MaterialModule.forRoot(),
     Ng2BootstrapModule.forRoot(),

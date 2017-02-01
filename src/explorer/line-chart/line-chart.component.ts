@@ -1,4 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectorRef} from "@angular/core";
+import {Message} from "primeng/components/common/api";
+import {DataService} from "../data-form/data-form.service";
 /**
  * Created by calin.crist on 15/01/2017.
  */
@@ -9,71 +11,58 @@ import {Component, OnInit} from "@angular/core";
     templateUrl: 'line-chart.component.html'
 })
 
-export class LineChartComponent {
+export class LineChartComponent implements OnChanges {
 
-  lineChartOptions: any = {
-    chartType: 'LineChart',
-    dataTable: {
-      cols: [
-        {
-          'type' : 'number',
-          'label': 'No. of people'
-        },
-        {
-          'type' : 'number',
-          'label': 'Germany'
-        },
-        {
-          'type' : 'number',
-          'label': 'USA'
-        },
-        {
-          'type' : 'number',
-          'label': 'Brazil'
-        }
-      ],
-      rows: [
-        {
-          'c': [
-            {'v': 1},
-            {'v': 37.8},
-            {'v': 80.8},
-            {'v': 41.8}
-          ]
-        },
-        {
-          'c': [
-            {'v': 2},
-            {'v': 30.9},
-            {'v': 69.5},
-            {'v': 32.4}
-          ]
-        },
-        {
-          'c': [
-            {'v': 3},
-            {'v': 25.4},
-            {'v': 57},
-            {'v': 25.7}
-          ]
-        },
-        {
-          'c': [
-            {'v': 4},
-            {'v': 11.7},
-            {'v': 18.8},
-            {'v': 10.5}
-          ]
-        }
-      ]
-    },
-    options: {
-      title: 'No. of people',
-      subtitle: 'subcategory (in billions)',
-      width: '850',
-      height: '500',
-      intervals: { 'lineWidth':2, 'barWidth': 0.5 },
-      bars: 'vertical'
-    },
+  msgs: Message[];
+
+  @Input() chartData: any;
+
+  @Input() set data(newData: any) {
+    this.chartData = {
+      labels: [],
+      datasets: []
+    }
+
+    if (newData == null) {
+      return;
+    }
+
+    this.chartData.labels = newData['years'];
+    for (let set of newData['datasets']) {
+      let obj = {
+        label: set.country_name,
+        data: set.data,
+        borderColor: this.randomColor(2),
+        fill: false
+      };
+      this.chartData.datasets.push(obj);
+    }
+  }
+
+  constructor(private ref: ChangeDetectorRef) {
+    ref.detach();
+    setInterval(() => {
+      this.ref.detectChanges();
+    }, 5000);
+    
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.data = changes['data']
+  }
+
+  randomColor(brightness: any){
+    function randomChannel(brightness){
+      var r = 255-brightness;
+      var n = 0|((Math.random() * r) + brightness);
+      var s = n.toString(16);
+      return (s.length==1) ? '0'+s : s;
+    }
+    return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
+  }
+  
+  selectData(event) {
+    this.msgs = [];
+    this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
   }
 }

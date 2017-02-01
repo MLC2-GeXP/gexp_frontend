@@ -1,7 +1,1 @@
-<md-card-content class="countries-list">
-  <md-button-toggle style="display: block"
-    *ngFor='let country of countries'>
-    {{country.name + ' ' + country.countryId}}
-  </md-button-toggle>
-</md-card-content>
-<p><button (click)="applyFilter()" md-raised-button class="submit-button">Apply</button></p>
+<p-multiSelect [options]="countries_list" [(ngModel)]="selectedCountries" (onChange)="onCountrySelected()"></p-multiSelect>

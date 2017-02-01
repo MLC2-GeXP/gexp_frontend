@@ -1,48 +1,21 @@
-<h4 class="header">{{ pageTitle }}</h4>
+<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
 
-<gexp-data-form></gexp-data-form>
+  <div class="ui-grid-row">
+    <gexp-data-form *ngIf="initialData && countries" class="ui-grid-col-3"
+                    [countries]="countries"
+                    [initialData]="initialData"
+                    (getDataClicked)="onSubmit($event)"></gexp-data-form>
 
-<md-card style="min-height: 600px;">
-<md-grid-list cols="5" rowHeight="3:4" style="margin-top: 0px;" class="shadow">
-
-  <!--Line chart component-->
-  <md-grid-tile
-    [colspan]="4"
-    [rowspan]="2"
-    [style.background]="lightblue">
-
-    <!--Charts with tabs-->
-    <md-card>
-    <md-tab-group style="overflow:hidden;" selectedIndex="0">
-      <md-tab label="Geo chart">
-          <gexp-geo-chart style="overflow:hidden;"></gexp-geo-chart>
-      </md-tab>
-      <md-tab label="Line chart">
-        <gexp-line-chart></gexp-line-chart>
-      </md-tab>
-    </md-tab-group>
-    </md-card>
-
-  </md-grid-tile>
-
-  <!--Countries List component-->
-  <md-grid-tile
-    [colspan]="1"
-    [rowspan]="2"
-    [style.background]="lightgrey">
-    <gexp-countries-list></gexp-countries-list>
-  </md-grid-tile>
-</md-grid-list>
-</md-card>
-
-<md-grid-list cols="3" rowHeight="3:4">
-  <md-grid-tile [colspan]="1" [rowspan]="1">
-      <gexp-aditional-info></gexp-aditional-info>
-  </md-grid-tile>
-  <md-grid-tile [colspan]="1" [rowspan]="1">
-    <gexp-aditional-info></gexp-aditional-info>
-  </md-grid-tile>
-  <md-grid-tile [colspan]="1" [rowspan]="1">
-    <gexp-aditional-info></gexp-aditional-info>
-  </md-grid-tile>
-</md-grid-list>
+    <p-panel id="charts" header="Explore data" class="ui-grid-col-9">
+          <!--Charts with tabs-->
+          <p-tabView class="">
+            <p-tabPanel header="Line chart">
+              <gexp-line-chart *ngIf="chartData" [data]="chartData.lineChartData" ></gexp-line-chart>
+            </p-tabPanel>
+            <p-tabPanel header="Geo chart">
+              <gexp-geo-chart *ngIf="chartData" [data]="chartData.lineChartData"></gexp-geo-chart>
+            </p-tabPanel>
+          </p-tabView>
+    </p-panel>
+  </div>
+</div>
